@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>NutzCode.Libraries.PerceptualImage</PackageId>
+	<Authors>Máximo Piva</Authors>
+    <Product>NutzCode.Libraries.PerceptualImage</Product>
+	<Copyright>Copyright (c) 2012-2020 Máximo Piva</Copyright>
+    <PackageProjectUrl>https://github.com/maxpiva/NutzCode.Libraries.PerceptualImage</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/maxpiva/NutzCode.Libraries.PerceptualImage</RepositoryUrl>
+	<Description>Perceptual Image Library with Vantage Point Tree and Hamming Distance Optimizations</Description>   
+	<RepositoryType>git</RepositoryType>
+    <PackageTags>perceptual image library Vantage Point Tree netstandard net</PackageTags>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <Version>1.0</Version>
+    <FileVersion>1.0</FileVersion>
+  </PropertyGroup>
+</Project>
