@@ -4,9 +4,14 @@ namespace NutzCode.Libraries.PerceptualImage.Hash
 {
     public interface IHashItem : IComparable
     {
-        IIdentity Identity { get; set; }
+        bool IsDeleted { get; set; }
         int SortDistance { get; set; }
         byte[] ByteArray { get; }
         int CalculateDistance(IHashItem dist);
+    }
+
+    public interface IHashItem<T> : IHashItem
+    {
+        T Id { get; }
     }
 }

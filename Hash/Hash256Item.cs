@@ -1,28 +1,28 @@
 ﻿namespace NutzCode.Libraries.PerceptualImage.Hash
 {
-    public class Hash256Item : IHashItem
+    public class Hash256Item<T> : IHashItem<T>
     {
-        public Hash256Item(IIdentity identity, byte[] hash)
+        public Hash256Item(T id, byte[] hash)
         {
-            Identity = identity;
+            Id = id;
             Hash1 = ((ulong) hash[0] << 56) | ((ulong) hash[1] << 48) | ((ulong) hash[2] << 40) | ((ulong) hash[3] << 32) | ((ulong) hash[4] << 24) | ((ulong) hash[5] << 16) | ((ulong) hash[6] << 8) | hash[7];
             Hash2 = ((ulong) hash[8] << 56) | ((ulong) hash[9] << 48) | ((ulong) hash[10] << 40) | ((ulong) hash[11] << 32) | ((ulong) hash[12] << 24) | ((ulong) hash[13] << 16) | ((ulong) hash[14] << 8) | hash[15];
             Hash3 = ((ulong) hash[16] << 56) | ((ulong) hash[17] << 48) | ((ulong) hash[18] << 40) | ((ulong) hash[19] << 32) | ((ulong) hash[20] << 24) | ((ulong) hash[21] << 16) | ((ulong) hash[22] << 8) | hash[23];
             Hash4 = ((ulong) hash[24] << 56) | ((ulong) hash[25] << 48) | ((ulong) hash[26] << 40) | ((ulong) hash[27] << 32) | ((ulong) hash[28] << 24) | ((ulong) hash[29] << 16) | ((ulong) hash[30] << 8) | hash[31];
         }
 
-        public Hash256Item(IIdentity identity, ulong[] hash)
+        public Hash256Item(T id, ulong[] hash)
         {
-            Identity = identity;
+            Id = id;
             Hash1 = hash[0];
             Hash2 = hash[1];
             Hash3 = hash[2];
             Hash4 = hash[3];
         }
 
-        public Hash256Item(IIdentity identity, ulong hash1, ulong hash2, ulong hash3, ulong hash4)
+        public Hash256Item(T identity, ulong hash1, ulong hash2, ulong hash3, ulong hash4)
         {
-            Identity = identity;
+            Id = identity;
             Hash1 = hash1;
             Hash2 = hash2;
             Hash3 = hash3;
@@ -47,10 +47,11 @@
             }
         }
 
-        public IIdentity Identity { get; set; }
-
+        public T Id { get; private set; }
 
         public int SortDistance { get; set; }
+
+        public bool IsDeleted { get; set; }
 
         public byte[] ByteArray
         {
@@ -85,10 +86,10 @@
 
         public int CalculateDistance(IHashItem dist)
         {
-            ulong x = ((Hash256Item) dist).Hash1 ^ Hash1;
-            ulong y = ((Hash256Item) dist).Hash2 ^ Hash2;
-            ulong u = ((Hash256Item) dist).Hash3 ^ Hash3;
-            ulong v = ((Hash256Item) dist).Hash4 ^ Hash4;
+            ulong x = ((Hash256Item<T>) dist).Hash1 ^ Hash1;
+            ulong y = ((Hash256Item<T>) dist).Hash2 ^ Hash2;
+            ulong u = ((Hash256Item<T>) dist).Hash3 ^ Hash3;
+            ulong v = ((Hash256Item<T>) dist).Hash4 ^ Hash4;
             ulong m1 = 0x5555555555555555;
             ulong m2 = 0x3333333333333333;
             ulong m3 = 0x0F0F0F0F0F0F0F0F;
@@ -151,7 +152,7 @@
         }*/
         public int CompareTo(object obj)
         {
-            Hash256Item b = (Hash256Item) obj;
+            Hash256Item<T> b = (Hash256Item<T>) obj;
             return SortDistance.CompareTo(b.SortDistance);
         }
     }

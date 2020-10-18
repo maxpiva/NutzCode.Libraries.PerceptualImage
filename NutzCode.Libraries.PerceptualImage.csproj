@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net47</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>NutzCode.Libraries.PerceptualImage</PackageId>
+    <PackageId>PerceptualImage</PackageId>
 	<Authors>Máximo Piva</Authors>
     <Product>NutzCode.Libraries.PerceptualImage</Product>
 	<Copyright>Copyright (c) 2012-2020 Máximo Piva</Copyright>
@@ -17,4 +17,7 @@
     <Version>1.0</Version>
     <FileVersion>1.0</FileVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Hash\Hash64Item.cs" />
+  </ItemGroup>
 </Project>

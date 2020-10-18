@@ -1,5 +1,4 @@
 ﻿using System;
-using NutzCode.Libraries.PerceptualImage.Hash;
 
 namespace NutzCode.Libraries.PerceptualImage
 {
@@ -84,12 +83,14 @@ namespace NutzCode.Libraries.PerceptualImage
         }
 
 
-        public static Hash256Item Hash(IIdentity identity, int[,] image, int width, int height)
+        public static byte[] Hash(int[,] image, int width, int height)
         {
             int[,] image2 = new int[width, height];
             int mye = height - 3;
             int mxe = width - 3;
 
+
+            //blur
             for (int y = 3; y < mye; y++)
             {
                 for (int x = 3; x < mxe; x++)
@@ -526,7 +527,7 @@ namespace NutzCode.Libraries.PerceptualImage
                 }
             }
 
-            return new Hash256Item(identity, GenerateHashes(s1));
+            return GenerateHashes(s1);
         }
     }
 }

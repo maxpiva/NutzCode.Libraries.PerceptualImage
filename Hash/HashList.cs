@@ -2,11 +2,11 @@
 
 namespace NutzCode.Libraries.PerceptualImage.Hash
 {
-    public class HashList : List<IHashItem>
+    public class HashList<T> : List<T> where T : IHashItem
     {
         public void CustomSort(int low, int high)
         {
-            List<IHashItem> list = new List<IHashItem>();
+            List<T> list = new List<T>();
             for (int x = low; x <= high; x++)
                 list.Add(this[x]);
             list.Sort();
@@ -20,4 +20,5 @@ namespace NutzCode.Libraries.PerceptualImage.Hash
             CustomSort(0, Count - 1);
         }
     }
+
 }

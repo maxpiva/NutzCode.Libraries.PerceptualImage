@@ -1,6 +1,6 @@
 ﻿namespace NutzCode.Libraries.PerceptualImage.Hash
 {
-    public class Hash256LookUpItem : IHashItem
+    public class Hash256LookUpItem<T> : IHashItem<T>
     {
         private static readonly byte[] Table = new byte[65536];
 
@@ -21,9 +21,9 @@
             }
         }
 
-        public Hash256LookUpItem(IIdentity identity, byte[] hash)
+        public Hash256LookUpItem(T id, byte[] hash)
         {
-            Identity = identity;
+            Id = id;
             Hashes[0] = (ushort) ((hash[0] << 8) | hash[1]);
             Hashes[1] = (ushort) ((hash[2] << 8) | hash[3]);
             Hashes[2] = (ushort) ((hash[4] << 8) | hash[5]);
@@ -43,9 +43,9 @@
         }
 
         public ushort[] Hashes { get; internal set; } = new ushort[16];
-        public IIdentity Identity { get; set; }
+        public T Id { get; }
         public int SortDistance { get; set; }
-
+        public bool IsDeleted { get; set; }
 
         public byte[] ByteArray
         {
@@ -67,7 +67,7 @@
 
         public int CalculateDistance(IHashItem dist)
         {
-            Hash256LookUpItem l = (Hash256LookUpItem) dist;
+            Hash256LookUpItem<T> l = (Hash256LookUpItem<T>) dist;
             int val = Table[l.Hashes[0] ^ Hashes[0]];
             val += Table[l.Hashes[1] ^ Hashes[1]];
             val += Table[l.Hashes[2] ^ Hashes[2]];
@@ -89,7 +89,7 @@
 
         public int CompareTo(object obj)
         {
-            Hash256LookUpItem b = (Hash256LookUpItem) obj;
+            Hash256LookUpItem<T> b = (Hash256LookUpItem<T>) obj;
             return SortDistance.CompareTo(b.SortDistance);
         }
     }
